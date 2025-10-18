@@ -10,14 +10,27 @@ class TabIframePlugin(octoprint.plugin.StartupPlugin,
 
     def on_after_startup(self):
         self._logger.info("Tab Iframe Plugin loaded!")
+        self._logger.info("Tab - Title: {}, URL: {}, Icon: {}".format(
+            self._settings.get(["title"]),
+            self._settings.get(["url"]),
+            self._settings.get(["icon"])
+        ))
 
     def get_settings_defaults(self):
         return dict(
-            tabs=[]
+            title="Custom Tab",
+            url="https://example.com",
+            icon="globe"
         )
 
     def get_template_configs(self):
         return [
+            dict(
+                type="tab",
+                custom_bindings=False,
+                name=self._settings.get(["title"]),
+                icon=self._settings.get(["icon"])
+            ),
             dict(type="settings", custom_bindings=False)
         ]
 

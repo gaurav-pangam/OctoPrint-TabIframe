@@ -1,14 +1,13 @@
 # OctoPrint-TabIframe
 
-A simple OctoPrint plugin that allows users to add custom tabs with configurable URLs displayed in iframes.
+A simple OctoPrint plugin that adds a custom tab with an embedded iframe to display any web page within your OctoPrint interface.
 
 ## Features
 
-- **Add Custom Tabs**: Create multiple custom tabs with user-defined titles
-- **Configure URLs**: Set any URL for each tab to be displayed in an iframe
-- **Icon Selection**: Choose from a variety of built-in OctoPrint icons for each tab
-- **Easy Management**: Add or remove tabs directly from the plugin settings
-- **Responsive Design**: Tabs adapt to different screen sizes
+- **Single Custom Tab**: Add one iframe tab to your OctoPrint interface
+- **Simple Configuration**: Just 3 fields - Title, URL, and Icon
+- **Refresh Button**: Built-in refresh button to reload the iframe without refreshing the entire page
+- **Responsive**: 600px height iframe that displays your content cleanly
 - **Automatic Saving**: Changes are saved automatically
 
 ## Installation
@@ -44,26 +43,22 @@ Then restart OctoPrint.
 
 ## Usage
 
-### Adding a Tab
+### Configuring the Tab
 
 1. Go to **Settings** → **Tab Iframe** (under Plugins)
-2. Click the **"Add Tab"** button
-3. Enter the following information:
-   - **Title**: The name of the tab (e.g., "Dashboard", "Webcam")
-   - **URL**: The full URL to display (e.g., `https://example.com`)
-   - **Icon**: Select an icon from the dropdown (e.g., Globe, Camera, Settings)
-4. Click **Save** to apply changes
+2. Enter the following information:
+   - **Tab Title**: The name of the tab (e.g., "Dashboard", "Camera", "Power Control")
+   - **URL**: The full URL to display (e.g., `https://example.com` or `http://192.168.0.203`)
+   - **Icon**: Select an icon from the dropdown (e.g., globe, camera, plug)
+3. Click **Save** to apply changes
+4. Refresh the page (Ctrl+F5 or Cmd+Shift+R)
 
-### Removing a Tab
+### Using the Tab
 
-1. Go to **Settings** → **Tab Iframe**
-2. Find the tab you want to remove
-3. Click the **"Remove"** button
-4. Click **Save** to apply changes
+Once configured, your custom tab will appear in the main OctoPrint interface.
 
-### Viewing Tabs
-
-Once configured, your custom tabs will appear in the main OctoPrint interface. Click on any tab to view the configured URL in an iframe.
+- Click on the tab to view the configured URL in an iframe
+- Use the **Refresh** button in the toolbar to reload just the iframe content without refreshing the entire page
 
 ## Available Icons
 
@@ -92,13 +87,35 @@ The plugin stores its configuration in OctoPrint's `config.yaml` file under the 
 ```yaml
 plugins:
   tabiframe:
-    tabs:
-      - title: "My Dashboard"
-        url: "https://example.com/dashboard"
-        icon: "globe"
-      - title: "Webcam"
-        url: "https://example.com/webcam"
-        icon: "camera"
+    title: "Custom Tab"
+    url: "https://example.com"
+    icon: "globe"
+```
+
+## Examples
+
+**Camera Feed:**
+
+```yaml
+title: "Camera"
+url: "http://192.168.1.100:8080/stream"
+icon: "camera"
+```
+
+**Dashboard:**
+
+```yaml
+title: "Dashboard"
+url: "https://grafana.example.com/dashboard"
+icon: "chart"
+```
+
+**Smart Switch:**
+
+```yaml
+title: "Power Control"
+url: "http://192.168.0.203"
+icon: "plug"
 ```
 
 ## Troubleshooting
@@ -134,6 +151,8 @@ For issues, feature requests, or contributions, please visit the GitHub reposito
 ### Version 1.0.0
 
 - Initial release
-- Add/remove custom tabs
-- Configure URLs and icons
-- Responsive iframe display
+- Single custom tab with iframe
+- Simple 3-field configuration (Title, URL, Icon)
+- Built-in refresh button
+- 600px responsive iframe display
+- Automatic settings loading

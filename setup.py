@@ -21,6 +21,13 @@ setuptools.setup(
     url=plugin_url,
     license=plugin_license,
     packages=[plugin_package],
+    package_data={
+        plugin_package: [
+            "templates/*",
+            "static/css/*",
+            "static/js/*"
+        ]
+    },
     install_requires=plugin_requires,
     entry_points={
         "octoprint.plugin": [

@@ -1,46 +1,70 @@
-$(function() {
-    function TabIframeViewModel(parameters) {
-        var self = this;
+$(function () {
+  function TabIframeViewModel(parameters) {
+    var self = this;
+    self.settingsViewModel = parameters[0];
 
-        self.settings = parameters[0];
+    // Direct observables for the tab - initialize with defaults
+    self.tabUrl = ko.observable("https://example.com");
+    self.tabTitle = ko.observable("Custom Tab");
+    self.tabIcon = ko.observable("globe");
 
-        // Observable array to hold the tabs
-        self.tabs = ko.observableArray([]);
+    // Load settings when they become available
+    self.onBeforeBinding = function () {
+      console.log("TabIframe: onBeforeBinding called");
+      self.loadSettings();
+    };
 
-        // Add a new tab
-        self.addTab = function() {
-            self.settings.plugins.tabiframe.tabs.push({
-                title: ko.observable("New Tab"),
-                url: ko.observable("https://example.com"),
-                icon: ko.observable("globe")
-            });
-        };
+    self.loadSettings = function () {
+      try {
+        var settings = self.settingsViewModel.settings;
+        if (settings && settings.plugins && settings.plugins.tabiframe) {
+          var url = settings.plugins.tabiframe.url();
+          var title = settings.plugins.tabiframe.title();
+          var icon = settings.plugins.tabiframe.icon();
 
-        // Remove a tab
-        self.removeTab = function(tab) {
-            self.settings.plugins.tabiframe.tabs.remove(tab);
-        };
+          console.log(
+            "TabIframe: Loaded settings - URL:",
+            url,
+            "Title:",
+            title,
+            "Icon:",
+            icon
+          );
 
-        // This will get called before the TabIframeViewModel gets bound to the DOM
-        self.onBeforeBinding = function() {
-            // Load tabs from settings
-            var savedTabs = self.settings.settings.plugins.tabiframe.tabs();
-            if (savedTabs && savedTabs.length > 0) {
-                self.tabs(savedTabs);
-            }
-        };
+          if (url) self.tabUrl(url);
+          if (title) self.tabTitle(title);
+          if (icon) self.tabIcon(icon);
+        } else {
+          console.log("TabIframe: Settings not yet available");
+        }
+      } catch (e) {
+        console.error("TabIframe: Error loading settings:", e);
+      }
+    };
 
-        // Watch for changes in settings and update tabs
-        self.settings.settings.plugins.tabiframe.tabs.subscribe(function(newTabs) {
-            self.tabs(newTabs);
-        });
-    }
+    // Refresh iframe function
+    self.refreshIframe = function () {
+      var iframe = document.getElementById("tabiframe_iframe");
+      if (iframe) {
+        iframe.src = iframe.src;
+      }
+    };
 
-    // Register the view model
-    OCTOPRINT_VIEWMODELS.push([
-        TabIframeViewModel,
-        ["settingsViewModel"],
-        ["#tab_plugin_tabiframe"]
-    ]);
+    // Subscribe to settings changes
+    self.onSettingsShown = function () {
+      console.log("TabIframe: Settings shown, reloading");
+      self.loadSettings();
+    };
+
+    self.onSettingsHidden = function () {
+      console.log("TabIframe: Settings hidden, reloading");
+      self.loadSettings();
+    };
+  }
+
+  OCTOPRINT_VIEWMODELS.push([
+    TabIframeViewModel,
+    ["settingsViewModel"],
+    ["#settings_plugin_tabiframe", "#tab_plugin_tabiframe"],
+  ]);
 });
-
