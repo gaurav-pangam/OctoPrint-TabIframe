@@ -1,0 +1,57 @@
+<div class="tabiframe-settings">
+    <h4>{{ _('Custom Tabs') }}</h4>
+    
+    <div class="tabiframe-tabs-list">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>{{ _('Title') }}</th>
+                    <th>{{ _('URL') }}</th>
+                    <th>{{ _('Icon') }}</th>
+                    <th>{{ _('Actions') }}</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: settings.plugins.tabiframe.tabs">
+                <tr>
+                    <td><input type="text" class="input-block-level" data-bind="value: title" placeholder="Tab Title"></td>
+                    <td><input type="text" class="input-block-level" data-bind="value: url" placeholder="https://example.com"></td>
+                    <td>
+                        <select class="input-block-level" data-bind="value: icon">
+                            <option value="globe">{{ _('Globe') }}</option>
+                            <option value="link">{{ _('Link') }}</option>
+                            <option value="external-link">{{ _('External Link') }}</option>
+                            <option value="window">{{ _('Window') }}</option>
+                            <option value="folder">{{ _('Folder') }}</option>
+                            <option value="file">{{ _('File') }}</option>
+                            <option value="camera">{{ _('Camera') }}</option>
+                            <option value="print">{{ _('Print') }}</option>
+                            <option value="cog">{{ _('Settings') }}</option>
+                            <option value="info">{{ _('Info') }}</option>
+                            <option value="question">{{ _('Help') }}</option>
+                            <option value="star">{{ _('Star') }}</option>
+                            <option value="heart">{{ _('Heart') }}</option>
+                            <option value="bell">{{ _('Bell') }}</option>
+                            <option value="clock">{{ _('Clock') }}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" data-bind="click: $parent.removeTab">
+                            <i class="fa fa-trash"></i> {{ _('Remove') }}
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tabiframe-add-tab">
+        <button class="btn btn-primary" data-bind="click: addTab">
+            <i class="fa fa-plus"></i> {{ _('Add Tab') }}
+        </button>
+    </div>
+
+    <div class="alert alert-info">
+        <strong>{{ _('Note:') }}</strong> {{ _('Changes are saved automatically. Tabs will appear in OctoPrint after saving.') }}
+    </div>
+</div>
+

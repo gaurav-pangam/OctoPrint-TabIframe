@@ -1,0 +1,18 @@
+<div class="tabiframe-container">
+    <div class="tabiframe-tabs" data-bind="foreach: tabs">
+        <div class="tabiframe-tab-item">
+            <div class="tabiframe-tab-header">
+                <i class="fa" data-bind="css: 'fa-' + icon"></i>
+                <span data-bind="text: title"></span>
+            </div>
+            <div class="tabiframe-tab-content">
+                <iframe data-bind="attr: {src: url, id: 'iframe-' + $index()}"></iframe>
+            </div>
+        </div>
+    </div>
+    
+    <div class="tabiframe-empty" data-bind="visible: tabs().length === 0">
+        <p>{{ _('No custom tabs configured. Go to Settings to add some.') }}</p>
+    </div>
+</div>
+
