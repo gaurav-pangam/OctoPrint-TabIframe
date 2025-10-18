@@ -1,0 +1,4 @@
+include README.md
+recursive-include octoprint_tabiframe/templates *
+recursive-include octoprint_tabiframe/static *
+
