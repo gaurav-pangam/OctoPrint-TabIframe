@@ -13,15 +13,34 @@ A simple OctoPrint plugin that allows users to add custom tabs with configurable
 
 ## Installation
 
-1. Open OctoPrint and navigate to **Settings** → **Plugin Manager**
-2. Click **"...from archive"** and upload the plugin ZIP file, or
-3. Use the URL: `https://github.com/gaurav-pangam/OctoPrint-TabIframe/archive/master.zip`
+### Method 1: From Archive (Recommended)
 
-Alternatively, install via command line:
+1. Download the plugin ZIP file from the [releases page](https://github.com/gaurav-pangam/OctoPrint-TabIframe/releases)
+2. Open OctoPrint and navigate to **Settings** → **Plugin Manager**
+3. Click **"...from archive"** button
+4. Upload the downloaded ZIP file
+5. Restart OctoPrint
+
+### Method 2: From URL
+
+1. Open OctoPrint and navigate to **Settings** → **Plugin Manager**
+2. Click **"...from archive"** button
+3. Enter this URL in the dialog:
+   ```
+   https://github.com/gaurav-pangam/OctoPrint-TabIframe/archive/master.zip
+   ```
+4. Click **Install**
+5. Restart OctoPrint
+
+### Method 3: Command Line
+
+Run this command in your terminal:
 
 ```bash
 pip install https://github.com/gaurav-pangam/OctoPrint-TabIframe/archive/master.zip
 ```
+
+Then restart OctoPrint.
 
 ## Usage
 
